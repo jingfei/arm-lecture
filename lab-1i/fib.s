@@ -19,6 +19,9 @@ fibonacci:
 
 	cmp r4, #1 @ Compare R4 wtih 1
 	beq .L4  @ If R4 == 1 goto .L4 (which returns 1)
+	
+	cmp r4, #2
+	beq .L4
 
 	mov r3, #1
 	mov r5, #1
