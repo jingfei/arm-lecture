@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-extern int fibonacci(int x, int y, int z);
+extern int fibonacci(int x);
 
 int main(int argc, char **argv)
 {
@@ -8,7 +8,7 @@ int main(int argc, char **argv)
   int result=0;
 
   scanf("%d",&number);
-  result = fibonacci(number,1,0);   
+  result = fibonacci(number);   
   printf("The fibonacci sequence at %d is: %d\n", number, result);
 }
 
