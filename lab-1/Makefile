@@ -26,9 +26,23 @@ clean:
 QEMU_CMD = qemu-arm -L /usr/arm-linux-gnueabihf ./fibseq &
 CMD = yes 9 | $(call QEMU_CMD) && sleep 1
 qemu: fibseq
-	@yes 5 | $(call QEMU_CMD)
-	@sleep 1
-	@yes 6 | $(call QEMU_CMD)
-	@sleep 1
-	@yes 7 | $(call QEMU_CMD)
-	@sleep 1
+	@num=1 ; i1=0 ; i2=1 ; \
+	while [ $$num -le 50 ] ; do \
+		# save output answer \
+		ans=`yes $$num | $(call QEMU_CMD)` ; \
+		sleep 0.5 ; \
+		# echo output \
+		echo $$ans ; \
+		# split output string && save answer \
+		ans=`echo $$ans | cut -d ' ' -f 7` ;  \
+		# calculate the correct answer \
+		i3=$$i2 ;  i2=`expr $$i1 + $$i2` ; i1=$$i3 ; \
+		# check if it is right \
+		if [ "$$i1" -eq "$$ans" ] ; then \
+			echo " -> correct" ; \
+		else \
+			echo " -> wrong, the ans is $$i1" ; \
+		fi ; \
+		num=`expr $$num + 1` ; \
+	done
+
