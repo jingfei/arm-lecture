@@ -1,0 +1,11 @@
+gnuplot
+> plot "analysis-result.txt"
+> set style data lines            # 設定成連線模式
+> set grid                        # 模擬方格紙效果
+> set title "fib efficiency"      # 加上標題。
+> replot                          # 重畫一遍
+> plot "analysis-result.txt" using 1:2 title 'Recursion', \
+       "analysis-result.txt" using 1:3 title 'Tail-Recursion', \    
+       "analysis-result.txt" using 1:4 title 'Iteration'     #  同時畫三圖 
+> set logscale y; replot          # y軸差異太大, 用 logscale
+> set output "efficiency.png" ; set term png ; replot
